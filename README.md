@@ -1,6 +1,8 @@
 # Docker Compose Nodejs and Postgres example
 
-## Run the System
+## How to run
+
+### Run the System
 We can easily run the whole with only a single command:
 ```bash
 docker compose up
@@ -13,7 +15,7 @@ The services can be run on the background with command:
 docker compose up -d
 ```
 
-## Stop the System
+### Stop the System
 Stopping all the running containers is also simple with a single command:
 ```bash
 docker compose down
@@ -23,6 +25,43 @@ If you need to stop and remove all containers, networks, and all images used by 
 ```bash
 docker compose down --rmi all
 ```
+
+## Developing locally
+If you want to only run the postgres container run:
+```bash
+docker compose up postgresdb -d
+```
+
+Then you can run the application using [nodemon](https://www.npmjs.com/package/nodemon). This allows you to devop in the application and it will automatically restart when you save a file.
+
+To add the config for the applciation, create a `.env` file inside the `bezkoder-app` folder with the following contents:
+
+```ini
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASSWORD=123456
+DB_NAME=bezkoder_db
+DB_PORT=5433
+
+NODE_DOCKER_PORT=8080
+```
+
+Note this has the same keys as the `.env.sample` file and the same values as the `.env` file from the root of the repo.
+
+To run the application, first navigate to the application folder where `package.json` resides. e.g.
+
+```bash
+cd bezkoder-app
+```
+
+Then download the dependencies and run the application locally (provided [nodeJS](https://nodejs.org/en/download) is installed):
+
+```bash
+npm install
+npm run dev
+```
+
+## Additional resources
 
 For more detail, please visit:
 > [Docker Compose Node.js and Postgres example](https://www.bezkoder.com/docker-compose-nodejs-postgres/)
